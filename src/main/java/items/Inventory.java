@@ -30,6 +30,24 @@ public class Inventory
         // lhs needs to have items added to it.
         // rhs's size is needed
         // lhs.????(rhs.????)
+        this.data = d;
+        this.next = null
+    int lhsSize = lhs.getSize();
+    int rhsSize = rhs.getSize();
+    
+    int maxStackSize = lhs.getMaxStackSize();
+
+
+    int totalSize = lhsSize + rhsSize;
+
+    if (totalSize <= maxStackSize) {
+        lhs.setSize(totalSize); 
+        rhs.setSize(0);  
+    } 
+    else {
+        lhs.setSize(maxStackSize);  // Fill lhs to the max
+        rhs.setSize(totalSize - maxStackSize);  // Remainder stays in rhs
+    }
     }
 
     /**
@@ -94,7 +112,7 @@ public class Inventory
     public boolean isFull()
     {
         // Replace the next line
-        return false;
+        return true;
     }
 
     /**
@@ -118,7 +136,9 @@ public class Inventory
     public ItemStack findMatchingItemStack(ItemStack key)
     {
         // Add the necessary sequential search loop
-
+         if(!(key instanceof Item))
+            return false
+         Item keyItem = (Item) key
         return null;
     }
 
@@ -130,6 +150,11 @@ public class Inventory
     public void addItemStackNoCheck(ItemStack toAdd)
     {
         LinkedList.Node<ItemStack> newNode = new LinkedList.Node<>(toAdd);
+         // If adding the first Node
+        if (this.id == null) {
+            this.id        = newNode;
+            this.name        = newNode;
+
 
         // Use the appendNode/add logic from Review 1 as your starting point
         // Once we reach this function... we know that `toAdd` must be stored
@@ -151,7 +176,7 @@ public class Inventory
             // If the Item is stackable, add it to the ItemStack
             if (match.permitsStacking()) {
                 mergeStacks(match, stack);
-
+                 
                 return true;
             }
         }
