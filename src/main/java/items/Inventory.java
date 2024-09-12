@@ -113,6 +113,7 @@ public class Inventory
     {
         // Replace the next line
         return true;
+        /// return this.utillizedSlotes() >=this.capacity
     }
 
     /**
@@ -151,10 +152,17 @@ public class Inventory
     {
         LinkedList.Node<ItemStack> newNode = new LinkedList.Node<>(toAdd);
          // If adding the first Node
-        if (this.id == null) {
-            this.id        = newNode;
-            this.name        = newNode;
-
+        if (this.slots.head == null) {
+            this.slots        = newNode;
+        } else {
+        LinkedList.Node<ItemStack> current = this.slots.head;
+        while (current.next != null) {
+            current = current.next;
+        }
+        current.next = newNode;
+    }
+    this.slots.currentSize++; 
+//// or write as a loop 
 
         // Use the appendNode/add logic from Review 1 as your starting point
         // Once we reach this function... we know that `toAdd` must be stored
